@@ -4,6 +4,5 @@ Flask
 pandas
 joblib
 Gunicorn
-sklearn
 numpy
 jsonpickle
