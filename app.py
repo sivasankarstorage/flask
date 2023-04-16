@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,request
 import pandas as pd
 import joblib
 from sklearn.model_selection import train_test_split
@@ -22,9 +22,12 @@ def temp():
 
 @app.route('/test')
 def test():
-    
     input1 = pd.read_csv("test.csv")
     prediction = model.predict(input1)
     print(input1)
     print(prediction)
     return ' '.join([str(elem) for i,elem in enumerate(prediction)])
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    return request
