@@ -1,3 +1,4 @@
+import sklearn
 from flask import Flask
 import pandas as pd
 import joblib
@@ -6,7 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import numpy as np
 import jsonpickle
-import sklearn
+
 
 app = Flask(__name__)
 
