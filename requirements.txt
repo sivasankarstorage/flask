@@ -1,7 +1,9 @@
 Flask
 pandas
 joblib
-sklearn
+Gunicorn
+sklearn.model_selection
+sklearn.ensemble
+sklearn.metrics
 numpy
 jsonpickle
-Gunicorn
