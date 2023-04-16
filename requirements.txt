@@ -1,5 +1,5 @@
 wheel
-sklearn
+scikit-learn
 Flask
 pandas
 joblib
