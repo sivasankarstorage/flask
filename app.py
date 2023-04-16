@@ -10,7 +10,7 @@ import jsonpickle
 
 app = Flask(__name__)
 
-
+model = joblib.load('rf_model.joblib')
 
 @app.route('/')
 def hello_world():
@@ -22,7 +22,7 @@ def temp():
 
 @app.route('/test')
 def test():
-    model = joblib.load('rf_model.joblib')
+    
     input1 = pd.read_csv("test.csv")
     prediction = model.predict(input1)
     print(input1)
