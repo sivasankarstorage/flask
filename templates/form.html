@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>POST Request Example</title>
+</head>
+<body>
+	<h1>POST Request Example</h1>
+	<form id="my-form">
+		<label for="message">Enter your message:</label><br>
+		<textarea id="message" name="message"></textarea><br><br>
+		<button type="submit">Submit</button>
+	</form>
+	<script>
+		const form = document.getElementById('my-form');
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const message = document.getElementById('message').value;
+			const response = await fetch('https://sivasankarstorage-jubilant-space-p6xp6g4pvj926x4p-5000.preview.app.github.dev/predict', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'text/plain'
+				},
+				body: message
+			});
+			const result = await response.text();
+			alert(result);
+		});
+	</script>
+</body>
+</html>
