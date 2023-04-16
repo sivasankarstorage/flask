@@ -1,4 +1,7 @@
 Flask
 pandas
 joblib
+sklearn
+numpy
+jsonpickle
 Gunicorn
