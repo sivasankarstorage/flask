@@ -6,4 +6,3 @@ joblib
 Gunicorn
 numpy
 jsonpickle
-json
