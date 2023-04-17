@@ -6,11 +6,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import numpy as np
 import jsonpickle
-
+import json
 
 app = Flask(__name__)
 
-model = joblib.load('rf_model.joblib')
+model = joblib.load('rfr_model.joblib')
 
 @app.route('/')
 def hello_world():
@@ -34,9 +34,7 @@ def predict():
     # data = request.get_json() 
     # name = data['name'] 
     # return f"Hello, {name}!"
-    data = request.data.decode('utf-8').split(' ')
-    print(data)
-    dict= { 'Discount': [int(data[0])], 'Approver':[int(data[1])], 'days':[int(data[2])] } 
-    print(dict)
-    prediction = model.predict(dict)
+    data = request.data.decode('utf-8')
+    jin = json.loads(data)
+    prediction = model.predict(pd.DataFrame(jin))
     return ' '.join([str(elem) for i,elem in enumerate(prediction)])
