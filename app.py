@@ -7,8 +7,8 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 import jsonpickle
 import json
-import csv
-import requests
+# import csv
+# import requests
 
 app = Flask(__name__)
 
@@ -41,29 +41,29 @@ def predict():
     prediction = model.predict(pd.DataFrame(jin))
     return ' '.join([str(elem) for i,elem in enumerate(prediction)])
 
-@app.route('/get_csv')
-def get_csv():
-    # Get data as an array of dictionaries
-    # data = [
-    #     {'name': 'John Doe', 'age': 30, 'email': 'john.doe@example.com'},
-    #     {'name': 'Jane Smith', 'age': 25, 'email': 'jane.smith@example.com'},
-    #     {'name': 'Bob Johnson', 'age': 40, 'email': 'bob.johnson@example.com'}
-    # ]
-    data = requests.get('https://ap-south-1.aws.data.mongodb-api.com/app/application-0-bgguv/endpoint/getCSV').text
-    print(type(data))
-    temp = json.loads(data)
-    # Convert data to CSV format
-    # print(temp)
-    fieldnames = ["discount", "approver", "days","status"]
-    csv_string = ",".join(fieldnames) + "\n"
-    print(temp[0]['discount'])
-    for item in temp:
-        print(item['discount'])
-        csv_string += ",".join([str(item[field]['$numberDouble']) for field in fieldnames]) + "\n"
+# @app.route('/get_csv')
+# def get_csv():
+#     # Get data as an array of dictionaries
+#     # data = [
+#     #     {'name': 'John Doe', 'age': 30, 'email': 'john.doe@example.com'},
+#     #     {'name': 'Jane Smith', 'age': 25, 'email': 'jane.smith@example.com'},
+#     #     {'name': 'Bob Johnson', 'age': 40, 'email': 'bob.johnson@example.com'}
+#     # ]
+#     data = requests.get('https://ap-south-1.aws.data.mongodb-api.com/app/application-0-bgguv/endpoint/getCSV').text
+#     print(type(data))
+#     temp = json.loads(data)
+#     # Convert data to CSV format
+#     # print(temp)
+#     fieldnames = ["discount", "approver", "days","status"]
+#     csv_string = ",".join(fieldnames) + "\n"
+#     print(temp[0]['discount'])
+#     for item in temp:
+#         print(item['discount'])
+#         csv_string += ",".join([str(item[field]['$numberDouble']) for field in fieldnames]) + "\n"
 
-    # Send CSV data as response
-    response = make_response(csv_string)
-    response.headers.set('Content-Type', 'text/csv')
-    response.headers.set('Content-Disposition', 'attachment', filename='data.csv')
+#     # Send CSV data as response
+#     response = make_response(csv_string)
+#     response.headers.set('Content-Type', 'text/csv')
+#     response.headers.set('Content-Disposition', 'attachment', filename='data.csv')
 
-    return response
+#     return response
