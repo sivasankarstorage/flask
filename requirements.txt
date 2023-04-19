@@ -6,3 +6,5 @@ joblib
 Gunicorn
 numpy
 jsonpickle
+csv
+requests
