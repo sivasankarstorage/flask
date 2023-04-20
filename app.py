@@ -67,3 +67,18 @@ def predict():
 #     response.headers.set('Content-Disposition', 'attachment', filename='data.csv')
 
 #     return response
+
+@app.route('/HelloGreeting', methods=['GET'])
+def greeting():
+    name = request.args.get('name')
+    return f'Hello, {name}!'
+
+@app.route('/add', methods=['POST'])
+def add():
+    a = request.form.get('a')
+    b = request.form.get('b')
+    result = int(a) + int(b)
+    return str(result)
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
