@@ -1,0 +1,39 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import accuracy_score
+import joblib 
+import numpy as np
+import jsonpickle
+
+# Load data
+data = pd.read_csv("cleandata.csv")
+print(data)
+features = ['Discount', 'Approver', 'days']
+target = 'output'
+
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(data[features], data[target], test_size=0.2, random_state=42)
+
+# Create a random forest model
+rf_model = RandomForestRegressor(n_estimators=100, max_depth=10, random_state=42)
+
+# Train the model
+rf_model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = rf_model.predict(X_test)
+# Evaluate the model accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+input1 = pd.read_csv("test.csv")
+print(rf_model.predict(input1))
+joblib.dump(rf_model, 'rf_model.joblib')
+
+# jmodel = joblib.load('rf_model.joblib')
+# model_json = jsonpickle.encode(jmodel, unpicklable=False)
+# with open('model.json', 'w') as f:
+#     f.write(model_json)
+# print(input1)
+# print("Done")
