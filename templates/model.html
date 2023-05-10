@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JSON Drop-down Demo</title>
+    <style>
+      label {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      select {
+        margin-bottom: 20px;
+      }
+
+      #btn {
+        display: block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #btn:hover {
+        background-color: #0062cc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JSON Drop-down Demo</h1>
+
+    <div>
+      <label for="opportunity">Opportunity:</label>
+      <select id="opportunity">
+        <option value="">-- Select an option --</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="basket">Basket:</label>
+      <input type="number" id="basket" name="basket">
+    </div>
+
+    <div>
+      <label for="approver">Approver:</label>
+      <select id="approver">
+        <option value="">-- Select an option --</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="discount">Discount:</label>
+      <input type="number" id="discount" name="discount">
+    </div>
+
+    <div>
+      <label for="quarter">Quarter:</label>
+      <input type="number" id="quarter" name="quarter">
+    </div>
+
+    <div>
+      <label for="numberOfDays">Number Of Days:</label>
+      <input type="number" id="numberOfDays" name="numberOfDays">
+    </div>
+
+    <div>
+      <label for="pc">PC Name:</label>
+      <select id="pc">
+        <option value="">-- Select an option --</option>
+      </select>
+    </div>
+
+    <button id="btn">Log selected values</button>
+
+    <script>
+      const opportunity = document.getElementById("opportunity");
+      const approver = document.getElementById("approver");
+      const pc = document.getElementById("pc");
+
+      const basket = document.getElementById("basket");
+      const discount = document.getElementById("discount");
+      const quarter = document.getElementById("quarter");
+      const numberOfDays = document.getElementById("numberOfDays");
+
+      const button = document.getElementById("btn");
+
+      // Fetch data from JSON file
+      fetch("data")
+        .then(response => response.json())
+        .then(data => {
+          // Populate drop-downs with options
+          console.log(data);
+          data.opportunities.forEach(option => {
+            const elem = document.createElement("option");
+            elem.textContent = option.Name;
+            elem.value = option.Value;
+            opportunity.appendChild(elem);
+          });
+
+          data.approvers.forEach(option => {
+            const elem = document.createElement("option");
+            elem.textContent = option.Name;
+            elem.value = option.Value;
+            approver.appendChild(elem);
+          });
+
+          data.pcNames.forEach(option => {
+            const elem = document.createElement("option");
+            elem.textContent = option.Name;
+            elem.value = option.Value;
+            pc.appendChild(elem);
+          });
+        })
+        .catch(error => console.log(error));
+
+      // Log selected values on button click
+      button.addEventListener("click", () => {
+        console.log(opportunity.value);
+        console.log(approver.value);
+        console.log(pc.value);
+        console.log(basket.value);
+        console.log(discount.value);
+        console.log(quarter.value);
+        console.log(numberOfDays.value);
+      });
+    </script>
+  </body>
+</html>
