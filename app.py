@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template,make_response, send_file
+from flask import Flask,request,render_template,make_response, send_file,jsonify
 import pandas as pd
 import joblib
 from sklearn.model_selection import train_test_split
@@ -17,6 +17,16 @@ model = joblib.load('rfr_model.joblib')
 @app.route('/')
 def hello_world():
     return render_template('form.html')
+
+@app.route('/new')
+def modelrender():
+    return render_template('model.html')
+
+@app.route('/data')
+def data():
+    with open('./staticResources/data.json', 'r') as f:
+        data = json.load(f)
+    return jsonify(data)
 
 @app.route('/name')
 def temp():
